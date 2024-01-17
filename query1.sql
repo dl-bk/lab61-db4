@@ -1,5 +1,4 @@
-SELECT Doctors.name || ' ' || Doctors.surname AS DoctorName, string_agg(Specializations.name, ', ') AS Specialization
+SELECT Surname AS DoctorSurname, Salary AS TotalSalary
 FROM Doctors
-JOIN doctorsspecializations ON Doctors.id = doctorsspecializations.doctor_id
-JOIN Specializations ON doctorsspecializations.specialization_id = Specializations.id
-GROUP BY Doctors.Id
+WHERE NOT EXISTS(SELECT * FROM Vacations WHERE Vacations.doctor_id = Doctors.id AND 
+				CURRENT_DATE BETWEEN start_date AND end_date)
